@@ -1,7 +1,7 @@
 //
 // Example of grafcet implementation using arduino-based PLC.
 // 
-// 2017-08-07  Jerson Huerfano <huerfano.jerson@gmail.com>
+// 2017-08-08  Jerson Huerfano <jleonardo04@hotmail.com>
 //
 
 #include "Grafcet.h"

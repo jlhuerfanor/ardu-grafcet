@@ -2,7 +2,7 @@
  * Stage.h
  *
  *  Created on: 7/08/2017
- *      Author: leonardo
+ *      Author: Jerson Huerfano <jleonardo04@hotmail.com>
  */
  
 #ifndef STAGE_H_

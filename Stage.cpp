@@ -2,7 +2,7 @@
  * Stage.cpp
  *
  *  Created on: 7/08/2017
- *      Author: leonardo
+ *      Author: Jerson Huerfano <jleonardo04@hotmail.com>
  */
 
 #include "Stage.h"
