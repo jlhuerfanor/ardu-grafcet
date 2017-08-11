@@ -2,7 +2,7 @@
  * grafcet.h
  *
  *  Created on: 7/08/2017
- *      Author: Jerson Huerfano <jleonardo04@hotmail.com>
+ *      Author: leonardo
  */
 
 #ifndef GRAFCET_H_

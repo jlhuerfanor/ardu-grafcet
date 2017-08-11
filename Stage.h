@@ -1,17 +1,11 @@
-/*
- * Stage.h
- *
- *  Created on: 7/08/2017
- *      Author: Jerson Huerfano <jleonardo04@hotmail.com>
- */
- 
 #ifndef STAGE_H_
 #define STAGE_H_
 
-#include <Arduino.h>
+//#include <Arduino.h>
 #include "libtypes.h"
-//#include <cstddef>
-
+#ifndef ARDUINO
+#include <cstddef>
+#endif
 #define ACTIVE       2
 #define TRANSITING   1
 #define STANDBY      0

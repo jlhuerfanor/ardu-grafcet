@@ -2,23 +2,31 @@
  * Timer.h
  *
  *  Created on: 8/08/2017
- *      Author: Jerson Huerfano <jleonardo04@hotmail.com>
+ *      Author: leonardo
  */
 
 #ifndef TIMER_H_
 #define TIMER_H_
 
-//#include <ctime>
-#include <Arduino.h>
+#ifndef ARDUINO
+#include <ctime>
+#endif
 #include "libtypes.h"
 
-typedef unsigned long ulong;
 typedef void (*TimerAction)(ulong);
 
-//#define NOW() ((ulong)(clock()))
-//#define TOMILLIS(time) (time * 1000 / CLOCKS_PER_SEC)
-#define NOW() ((ulong)millis())
-#define TOMILLIS(time) (time)
+#ifndef ARDUINO
+#define NOW() ((ulong)(clock()))
+#define TOFMS(time) ((time) * 1000.0 / CLOCKS_PER_SEC)
+#define TOMS(time) (time * 1000 / CLOCKS_PER_SEC)
+#else
+#define NOW() ((ulong)micros())
+#define TOFMS(time) ((time)/1000.0)
+#define TOMS(time) ((time) / 1000)
+#endif
+#define DELTA_TIME(t1, t2) (((t2) < (t1))? \
+	(ULONG_MAX - (t1) + (t2) + 1) : \
+	(t2) - (t1))
 
 class Timer {
 private:

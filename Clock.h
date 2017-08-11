@@ -2,7 +2,7 @@
  * Clock.h
  *
  *  Created on: 8/08/2017
- *      Author: Jerson Huerfano <jleonardo04@hotmail.com>
+ *      Author: leonardo
  */
 
 #ifndef CLOCK_H_

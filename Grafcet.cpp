@@ -2,7 +2,7 @@
  * grafcet.cpp
  *
  *  Created on: 7/08/2017
- *      Author: Jerson Huerfano <jleonardo04@hotmail.com>
+ *      Author: leonardo
  */
 
 #include "Grafcet.h"

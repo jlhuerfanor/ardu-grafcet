@@ -1,10 +1,13 @@
+#include <Wire.h>
+
 //
 // Example of grafcet implementation using arduino-based PLC.
 // 
-// 2017-08-08  Jerson Huerfano <jleonardo04@hotmail.com>
+// 2017-08-07  Jerson Huerfano <huerfano.jerson@gmail.com>
 //
 
 #include "Grafcet.h"
+#include "DataStream.h"
 
 // This is the set of functions each stage calls
 // once when is activated.
@@ -32,6 +35,8 @@ void onActivating(ulong milis);
 // id is the index of the transtion in the array that is being analyzed.
 bool thePredicates(int id);
 
+
+void sendState();
 // Stage list. Index is important for transition definitions.
 Stage q[6] = {
     Stage(NULL, q0_onActivated, q0_onShutdown),
@@ -61,14 +66,24 @@ Timer tim[6] = {
 
 // Grafcet timer. You can attatch a continous timer to this clock 
 // if you wanted to implement a temperature PID controller.
+byte buffer[50];
 Clock theClock = Clock(tim, 6);
-
 Grafcet grafcet = Grafcet(t, 6, q, 6, thePredicates);
+DataStream stream = DataStream(buffer, 50);
+int Nloops = 0;
 
 void setup() {
+  pinMode(4, INPUT_PULLUP);
+  pinMode(5, OUTPUT);
+  pinMode(6, OUTPUT);
+  pinMode(7, OUTPUT);
+  pinMode(8, OUTPUT);
+  pinMode(9, OUTPUT);
+  pinMode(10, OUTPUT);
   // you must set grafcet clock after setup.
   grafcet.setClock(&theClock);
   grafcet.setup();
+  Serial.begin(9600);
 }
 
 void loop() {
@@ -86,10 +101,10 @@ bool thePredicates(int id) {
     result = tim[0].isInterrupted();
     break;
   case 1:
-    result = tim[1].isInterrupted();
+    result = tim[1].isInterrupted() && (digitalRead(4)) == LOW;
     break;
   case 2:
-    result = false;//!tim[2].isEnabled() && tim[2].isInterrupted();
+    result = tim[2].isInterrupted() && (digitalRead(4)) == HIGH;
     break;
   case 3:
     result = tim[3].isInterrupted();
@@ -108,7 +123,14 @@ bool thePredicates(int id) {
 
 // This functions will be called once when stage is activated
 
-void q0_onActivated() { digitalWrite(5, HIGH); tim[0].enable(); }
+void q0_onActivated() { 
+  digitalWrite(5, HIGH); 
+  tim[0].enable();
+  stream.wseek(0);
+  stream.encode(Nloops);
+  Nloops++;
+  sendState();
+}
 void q1_onActivated() { digitalWrite(6, HIGH); tim[1].enable(); }
 void q2_onActivated() { digitalWrite(7, HIGH); tim[2].enable(); }
 void q3_onActivated() { digitalWrite(8, HIGH); tim[3].enable(); }
@@ -123,6 +145,14 @@ void q3_onShutdown() { digitalWrite(8, LOW); tim[3].reset(); }
 void q4_onShutdown() { digitalWrite(9, LOW); tim[4].reset(); }
 void q5_onShutdown() { digitalWrite(10, LOW); tim[5].reset(); }
 
+void sendState()
+{
+  int n = 0;
+  stream.rseek(0);
+  stream.decode(n);
+  Serial.print("Ciclo ");
+  Serial.println(n);
+}
 // This functions will be called when timers are interrupted
 void onActivating(ulong delta)
 {

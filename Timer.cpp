@@ -2,7 +2,7 @@
  * Timer.cpp
  *
  *  Created on: 8/08/2017
- *      Author: Jerson Huerfano <jleonardo04@hotmail.com>
+ *      Author: leonardo
  */
 
 #include "Timer.h"
@@ -18,10 +18,10 @@ void Timer::tick(ulong elapsedClicks) {
 	if(this->isEnabled())
 	{
 		this->elapsed += elapsedClicks;
-		if(TOMILLIS(this->elapsed) >= this->delta)
+		if(TOMS(this->elapsed) >= this->delta)
 		{
 			if(this->action != NULL)
-				this->action(TOMILLIS(this->elapsed));
+				this->action(TOMS(this->elapsed));
 			if(this->isContinous())
 				this->reset();
 			else this->disable();

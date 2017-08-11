@@ -2,13 +2,10 @@
  * Clock.cpp
  *
  *  Created on: 8/08/2017
- *      Author: Jerson Huerfano <jleonardo04@hotmail.com>
+ *      Author: leonardo
  */
 
 #include "Clock.h"
-
-// LONG_MAX 
-#define LONG_MAX (sizeof(ulong))
 
 Clock::Clock(Timer* timers, int timerCount) {
 	this->timers = timers;
@@ -18,7 +15,7 @@ Clock::Clock(Timer* timers, int timerCount) {
 
 void Clock::tick() {
 	ulong now = NOW();
-	ulong delta = (now < this->currentTime)? (LONG_MAX - this->currentTime + now + 1) : now - this->currentTime;
+	ulong delta = DELTA_TIME(this->currentTime, now);
 
 	this->currentTime = now;
 
