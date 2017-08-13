@@ -21,7 +21,7 @@ typedef void (*TimerAction)(ulong);
 #define TOMS(time) (time * 1000 / CLOCKS_PER_SEC)
 #else
 #define NOW() ((ulong)micros())
-#define TOFMS(time) ((time)/1000.0)
+#define TOFMS(time) ((time) / 1000.0)
 #define TOMS(time) ((time) / 1000)
 #endif
 #define DELTA_TIME(t1, t2) (((t2) < (t1))? \
