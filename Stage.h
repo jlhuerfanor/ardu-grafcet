@@ -3,9 +3,11 @@
 
 //#include <Arduino.h>
 #include "libtypes.h"
+
 #ifndef ARDUINO
 #include <cstddef>
 #endif
+
 #define ACTIVE       2
 #define TRANSITING   1
 #define STANDBY      0

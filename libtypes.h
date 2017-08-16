@@ -21,6 +21,7 @@ typedef byte * ptr;
 
 #define ULONG_MAX ((ulong)0xFFFF)
 #define LONG_MAX ((long)0xFFFF)
+#define PTR(a) ((ptr)(&(a)))
 
 
 #endif /* LIBTYPES_H_ */
