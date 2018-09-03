@@ -15,8 +15,10 @@ Timer::Timer(TimerAction action, ulong delta) {
 }
 
 void Timer::tick(ulong elapsedClicks) {
+
 	if(this->isEnabled())
 	{
+		// cout << "> Te: " << this->elapsed << ", Td: " << elapsedClicks << endl;
 		this->elapsed += elapsedClicks;
 		if(TOMS(this->elapsed) >= this->delta)
 		{
@@ -66,5 +68,5 @@ Timer::Timer(TimerAction action, ulong delta, bool isContinous) {
 	this->action = action;
 	this->elapsed = 0;
 	this->delta = delta;
-	this->state = 0x01;
+	this->state = (isContinous) ? 0x01 : 0x00;
 }

@@ -12,17 +12,17 @@
 #define TRANSITING   1
 #define STANDBY      0
 
-typedef void (*stageAction)(void);
+typedef void (*StageAction)(void);
 
 class Stage{
 private:
-  stageAction action;
-  stageAction onDeactivating;
-  stageAction onActivating;
+  StageAction action;
+  StageAction onDeactivating;
+  StageAction onActivating;
   byte state;
 public:
-  Stage(stageAction action);
-  Stage(stageAction action, stageAction onActivating, stageAction onDeactivating);
+  Stage(StageAction action);
+  Stage(StageAction action, StageAction onActivating, StageAction onDeactivating);
   virtual ~Stage();
 
   byte getState() const;

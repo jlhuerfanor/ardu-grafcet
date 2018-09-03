@@ -1,13 +1,13 @@
 #include "Stage.h"
 
-Stage::Stage(stageAction action) {
+Stage::Stage(StageAction action) {
   this->action = action;
   this->state = STANDBY;
   this->onDeactivating = 0;
   this->onActivating = 0;
 }
 
-Stage::Stage(stageAction action, stageAction onActivating, stageAction onDeactivating) {
+Stage::Stage(StageAction action, StageAction onActivating, StageAction onDeactivating) {
   this->action = action;
   this->state = STANDBY;
   this->onDeactivating = onDeactivating;
@@ -23,11 +23,15 @@ byte Stage::getState() const {
 }
 
 void Stage::activate() {
-  this->state = ACTIVE | TRANSITING;
+	if(!this->isActive()) {
+		this->state = ACTIVE | TRANSITING;
+	}
 }
 
 void Stage::deactivate() {
-  this->state = TRANSITING;
+	if(this->isActive()) {
+		this->state = TRANSITING;
+	}
 }
 
 void Stage::update() {
@@ -38,9 +42,9 @@ void Stage::update() {
       if(this->onActivating != NULL)
         this->onActivating();
       this->state = ACTIVE;
-    }
-    if(this->action != NULL)
+    } else if(this->action != NULL) {
     	this->action();
+    }
   }
   else if (this->isTransiting()) {
     if(this->onDeactivating != NULL)
@@ -49,8 +53,8 @@ void Stage::update() {
   }
 }
 bool Stage::isActive() {
-  return ((this->state & ACTIVE) >> 1);
+  return ((this->state & ACTIVE) == ACTIVE);
 }
 bool Stage::isTransiting() {
-  return ((this->state & TRANSITING));
+  return ((this->state & TRANSITING) == TRANSITING);
 }

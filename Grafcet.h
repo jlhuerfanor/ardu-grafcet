@@ -12,7 +12,14 @@
 #include "Transition.h"
 #include "Clock.h"
 
+#define GRAFCET_STATE_INITIALIZED 		(BIT(0))
+#define GRAFCET_STATE_ACTIVE			(BIT(1))
+
 typedef bool (*Predicate) (int);
+typedef void (*Action) ();
+typedef void (*PerTransition)(int);
+typedef void (*PerEvaluation)(int, bool evaluated);
+typedef void (*PerActivation)(int, bool activated);
 
 class Grafcet{
 private:
@@ -21,14 +28,22 @@ private:
   Stage * stages;
   int stageCount;
   Predicate predicate;
+  Action onStop;
   int initialState;
   Clock * clock;
+  byte state;
 public:
+  int vector = 0;
+  PerActivation perActivation;
+  PerTransition perTransition;
+  PerEvaluation perEvaluation;
+
   Grafcet(Transition * transitions, int transitionCount, Stage * stages, int stageCount, Predicate predicates);
 
   void setup();
   void loop();
   void reset();
+  void stop();
   int getInitialState() const;
   void setInitialState(int initialState);
   Predicate getPredicate() const;
@@ -38,6 +53,11 @@ public:
   Transition* getTransitions();
   Clock * getClock();
   void setClock(Clock* clock);
+  Action getOnStop() const;
+  void setOnStop(Action onStop);
+  bool isInitialized();
+  bool isStopped();
+  bool isActive();
 };
 
 #endif /* GRAFCET_H_ */

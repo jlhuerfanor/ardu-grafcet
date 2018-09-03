@@ -215,3 +215,9 @@ byte DataStream::endianness() {
 	else
 		return B_ENDIAN;
 }
+
+bool DataStream::encode(const char* str) {
+	uint len = strlen(str);
+
+	return this->encode(str, len);
+}

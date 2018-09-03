@@ -10,9 +10,14 @@
 
 #include "libtypes.h"
 #include "Parameter.h"
+#include <string.h>
+
+#ifndef ARDUINO
+#include <cstddef>
+#endif
 
 #define L_ENDIAN 'L'
-#define B_ENDIAN (~L_ENDIAN)
+#define B_ENDIAN 'B'
 
 class DataStream {
 protected:
@@ -46,6 +51,7 @@ public:
 	bool encode(const double & data);
 	bool encode(const bool & data);
 	bool encode(const Parameter& parameter);
+	bool encode(const char* str);
 
 	void rseek(const uint & position);
 	bool decode(ptr data, const uint & length);

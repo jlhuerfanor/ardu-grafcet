@@ -31,10 +31,11 @@ typedef void (*TimerAction)(ulong);
 class Timer {
 private:
 	ulong elapsed;
-	ulong delta;
-	byte state;
 	TimerAction action;
 public:
+	ulong delta;
+	byte state;
+
 	Timer(TimerAction action, ulong delta);
 	Timer(TimerAction action, ulong delta, bool isContinous);
 
