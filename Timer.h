@@ -1,9 +1,11 @@
-/*
- * Timer.h
- *
- *  Created on: 8/08/2017
- *      Author: leonardo
- */
+//============================================================================
+// Name        : Timer.h
+// Author      : Jerson Leonardo Huerfano Romero
+// Version     : 1.0.1
+// Copyright   : Copyright (C) 2018 Jerson Huerfano
+// Description : Defines a timer that can rise time events.
+//============================================================================
+
 
 #ifndef TIMER_H_
 #define TIMER_H_
@@ -30,23 +32,35 @@ typedef void (*TimerAction)(ulong);
 
 class Timer {
 private:
+	/* Timer counter; counts the elapsed time between first clock tick event. */
 	ulong elapsed;
+	/* Function pointer to timer event handler. */
 	TimerAction action;
-public:
+	/* Timespan to wait before timer event. */
 	ulong delta;
+	/* Timer state */
 	byte state;
-
+public:
+	/* Defines a non-continous timer instance. */
 	Timer(TimerAction action, ulong delta);
+	/* Defines a timer instance. */
 	Timer(TimerAction action, ulong delta, bool isContinous);
-
+	/* Handle clock tick event. */
 	void tick(ulong elapsedClicks);
+	/* Set the timer state to enable, starting to listen the clock tick events. */
 	void enable();
+	/* Set the timer state to disable, stopping to listen the clock tick events. */
 	void disable();
+	/* Gets a value that indicates if the timer is enabled. */
 	bool isEnabled();
+	/* Resets timer counter. */
 	void reset();
+	/* Gets a value that indicates if the timer is interrupted. */
 	bool isInterrupted();
-	bool isContinous() const;
-	void setContinous(bool continous);
+	/* Gets a value that indicates if the timer is on continuous mode. */
+	bool isContinuous() const;
+	/* Sets a value that indicates if the timer is on continuous mode. */
+	void setContinuous(bool continuous);
 };
 
 #endif /* TIMER_H_ */

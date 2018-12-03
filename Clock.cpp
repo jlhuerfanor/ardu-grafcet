@@ -1,9 +1,10 @@
-/*
- * Clock.cpp
- *
- *  Created on: 8/08/2017
- *      Author: leonardo
- */
+//============================================================================
+// Name        : Clock.cpp
+// Author      : Jerson Leonardo Huerfano Romero
+// Version     : 1.0.1
+// Copyright   : Copyright (C) 2018 Jerson Huerfano
+// Description : Provides a time signal to a set of timers.
+//============================================================================
 
 #include "Clock.h"
 
@@ -19,14 +20,13 @@ void Clock::tick() {
 
 	this->currentTime = now;
 
-	for(int i = 0; i < timerCount; i++)
-	{
+	for (int i = 0; i < timerCount; i++) {
 		this->timers[i].tick(delta);
 	}
 }
 
 void Clock::reset() {
 	this->currentTime = NOW();
-	for(int i = 0; i < this->timerCount; i++)
+	for (int i = 0; i < this->timerCount; i++)
 		this->timers[i].reset();
 }

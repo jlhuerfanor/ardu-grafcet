@@ -1,9 +1,11 @@
-/*
- * ParameterStore.h
- *
- *  Created on: 13/08/2017
- *      Author: leonardo
- */
+//============================================================================
+// Name        : Parameters.h
+// Author      : Jerson Leonardo Huerfano Romero
+// Version     : 1.0.1
+// Copyright   : Copyright (C) 2018 Jerson Huerfano
+// Description : Container for a memory parameter.
+//============================================================================
+
 
 #ifndef PARAMETER_H_
 #define PARAMETER_H_

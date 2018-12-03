@@ -1,9 +1,10 @@
-/*
- * Timer.cpp
- *
- *  Created on: 8/08/2017
- *      Author: leonardo
- */
+//============================================================================
+// Name        : Timer.cpp
+// Author      : Jerson Leonardo Huerfano Romero
+// Version     : 1.0.1
+// Copyright   : Copyright (C) 2018 Jerson Huerfano
+// Description : Defines a timer that can rise time events.
+//============================================================================
 
 #include "Timer.h"
 
@@ -24,7 +25,7 @@ void Timer::tick(ulong elapsedClicks) {
 		{
 			if(this->action != NULL)
 				this->action(TOMS(this->elapsed));
-			if(this->isContinous())
+			if(this->isContinuous())
 				this->reset();
 			else this->disable();
 		}
@@ -45,7 +46,7 @@ bool Timer::isEnabled() {
 	return this->state & 2;
 }
 
-bool Timer::isContinous() const {
+bool Timer::isContinuous() const {
 	return this->state & 1;
 }
 
@@ -53,7 +54,7 @@ bool Timer::isInterrupted() {
 	return !this->isEnabled() && this->elapsed != 0;
 }
 
-void Timer::setContinous(bool continous) {
+void Timer::setContinuous(bool continous) {
 	if(continous)
 		this->state = this->state | 1;
 	else this->state = this->state & 0xFE;

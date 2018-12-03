@@ -1,9 +1,10 @@
-/*
- * UdpPacket.h
- *
- *  Created on: 11/08/2017
- *      Author: leonardo
- */
+//============================================================================
+// Name        : DataStream.h
+// Author      : Jerson Leonardo Huerfano Romero
+// Version     : 1.0.1
+// Copyright   : Copyright (C) 2018 Jerson Huerfano
+// Description : Endianness-independent bytestream.
+//============================================================================
 
 #ifndef DATASTREAM_H_
 #define DATASTREAM_H_

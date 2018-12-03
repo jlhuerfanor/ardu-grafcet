@@ -1,3 +1,11 @@
+//============================================================================
+// Name        : Transition.h
+// Author      : Jerson Leonardo Huerfano Romero
+// Version     : 1.0.1
+// Copyright   : Copyright (C) 2018 Jerson Huerfano
+// Description : Implements a grafcet transition.
+//============================================================================
+
 #ifndef TRANSITION_H_
 #define TRANSITION_H_
 

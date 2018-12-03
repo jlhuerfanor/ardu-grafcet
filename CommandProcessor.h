@@ -1,9 +1,10 @@
-/*
- * CommandProcessor.h
- *
- *  Created on: 11/08/2017
- *      Author: leonardo
- */
+//============================================================================
+// Name        : CommandProcessor.h
+// Author      : Jerson Leonardo Huerfano Romero
+// Version     : 1.0.1
+// Copyright   : Copyright (C) 2018 Jerson Huerfano
+// Description : Class for decoding and processing commands.
+//============================================================================
 
 #ifndef COMMANDPROCESSOR_H_
 #define COMMANDPROCESSOR_H_
@@ -24,7 +25,10 @@ protected:
 	bool _encode(const ptr data, const uint & length, const byte& encoding);
 public:
 	CommandProcessor(ptr buffer, uint length, const byte * tail, uint tailLength, CommandReceivedHandler onReceived);
+	CommandProcessor(ptr buffer, uint length, const byte * tail, uint tailLength, CommandReceivedHandler onReceived, CommandProcessedHandler onProcessed);
+
 	CommandProcessor(ptr buffer, uint length, const char * tail, uint tailLength, CommandReceivedHandler onProcessed);
+	CommandProcessor(ptr buffer, uint length, const char * tail, uint tailLength, CommandReceivedHandler onReceived, CommandProcessedHandler onProcessed);
 
 	const byte* getTail() const;
 	uint getTailIndex() const;

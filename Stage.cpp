@@ -1,3 +1,11 @@
+//============================================================================
+// Name        : Stage.cpp
+// Author      : Jerson Leonardo Huerfano Romero
+// Version     : 1.0.1
+// Copyright   : Copyright (C) 2018 Jerson Huerfano
+// Description : Implements a grafcet stage.
+//============================================================================
+
 #include "Stage.h"
 
 Stage::Stage(StageAction action) {

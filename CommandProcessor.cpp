@@ -1,9 +1,10 @@
-/*
- * CommandProcessor.cpp
- *
- *  Created on: 11/08/2017
- *      Author: leonardo
- */
+//============================================================================
+// Name        : CommandProcessor.cpp
+// Author      : Jerson Leonardo Huerfano Romero
+// Version     : 1.0.1
+// Copyright   : Copyright (C) 2018 Jerson Huerfano
+// Description : Class for decoding and processing commands.
+//============================================================================
 
 #include "CommandProcessor.h"
 
@@ -59,6 +60,30 @@ void CommandProcessor::setOnProcessed(CommandProcessedHandler onProcessed) {
 
 CommandReceivedHandler CommandProcessor::getOnReceived() const {
 	return onReceived;
+}
+
+CommandProcessor::CommandProcessor(ptr buffer, uint length, const byte* tail,
+		uint tailLength, CommandReceivedHandler onReceived,
+		CommandProcessedHandler onProcessed) :
+		DataStream(buffer, length) {
+	this->tail = tail;
+	this->tailIndex = 0;
+	this->tailLength = tailLength;
+	this->onReceived = onReceived;
+	this->onProcessed = onProcessed;
+	this->output = NULL;
+}
+
+CommandProcessor::CommandProcessor(ptr buffer, uint length, const char* tail,
+		uint tailLength, CommandReceivedHandler onReceived,
+		CommandProcessedHandler onProcessed) :
+		DataStream(buffer, length) {
+	this->tail = (const byte*) tail;
+	this->tailIndex = 0;
+	this->tailLength = tailLength;
+	this->onReceived = onReceived;
+	this->onProcessed = onProcessed;
+	this->output = NULL;
 }
 
 void CommandProcessor::setOnReceived(CommandReceivedHandler onReceived) {

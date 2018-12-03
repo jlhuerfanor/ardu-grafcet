@@ -1,3 +1,11 @@
+//============================================================================
+// Name        : Transition.cpp
+// Author      : Jerson Leonardo Huerfano Romero
+// Version     : 1.0.1
+// Copyright   : Copyright (C) 2018 Jerson Huerfano
+// Description : Implements a grafcet transition.
+//============================================================================
+
 #include "Transition.h"
 
 

@@ -1,3 +1,11 @@
+//============================================================================
+// Name        : Stage.h
+// Author      : Jerson Leonardo Huerfano Romero
+// Version     : 1.0.1
+// Copyright   : Copyright (C) 2018 Jerson Huerfano
+// Description : Implements a grafcet stage.
+//============================================================================
+
 #ifndef STAGE_H_
 #define STAGE_H_
 

@@ -1,9 +1,10 @@
-/*
- * libtypes.h
- *
- *  Created on: 8/08/2017
- *      Author: leonardo
- */
+//============================================================================
+// Name        : libtypes.h
+// Author      : Jerson Leonardo Huerfano Romero
+// Version     : 1.0.1
+// Copyright   : Copyright (C) 2018 Jerson Huerfano
+// Description : some type definitions.
+//============================================================================
 
 #ifndef LIBTYPES_H_
 #define LIBTYPES_H_

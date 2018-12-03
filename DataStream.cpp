@@ -1,9 +1,10 @@
-/*
- * UdpPacket.cpp
- *
- *  Created on: 11/08/2017
- *      Author: leonardo
- */
+//============================================================================
+// Name        : DataStream.cpp
+// Author      : Jerson Leonardo Huerfano Romero
+// Version     : 1.0.1
+// Copyright   : Copyright (C) 2018 Jerson Huerfano
+// Description : Endianness-independent bytestream.
+//============================================================================
 
 #include "DataStream.h"
 

@@ -1,9 +1,11 @@
-/*
- * grafcet.cpp
- *
- *  Created on: 7/08/2017
- *      Author: leonardo
- */
+//============================================================================
+// Name        : Grafcet.cpp
+// Author      : Jerson Leonardo Huerfano Romero
+// Version     : 1.0.1
+// Copyright   : Copyright (C) 2018 Jerson Huerfano
+// Description : Container for a grafcet definition.
+//============================================================================
+
 
 #include "Grafcet.h"
 
