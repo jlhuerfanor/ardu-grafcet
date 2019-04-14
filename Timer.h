@@ -36,10 +36,6 @@ private:
 	ulong elapsed;
 	/* Function pointer to timer event handler. */
 	TimerAction action;
-	/* Timespan to wait before timer event. */
-	ulong delta;
-	/* Timer state */
-	byte state;
 public:
 	/* Defines a non-continous timer instance. */
 	Timer(TimerAction action, ulong delta);
@@ -61,6 +57,10 @@ public:
 	bool isContinuous() const;
 	/* Sets a value that indicates if the timer is on continuous mode. */
 	void setContinuous(bool continuous);
+        /* Timespan to wait before timer event. */
+	ulong delta;
+	/* Timer state */
+	byte state;
 };
 
 #endif /* TIMER_H_ */

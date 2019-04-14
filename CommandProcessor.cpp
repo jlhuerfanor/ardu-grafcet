@@ -22,16 +22,21 @@ void CommandProcessor::_encode(const byte& data) {
 	tailIndex = (data == this->tail[tailIndex]) ? tailIndex + 1 : 0;
 
 	if (this->tailIndex == this->tailLength) {
+		DataStream output(this->getBuffer() + this->getCount(), this->output_len);
+
+		output.setEndianness(this->getEndianness());
+
 		this->rseek(0);									// Reset read action
 		if (this->onReceived != NULL) {
-			this->onReceived(this, this->getOutput());
+
+			this->onReceived(this, &output);
 		}
 
 		this->tailIndex = 0;							// reset tail counter
 		this->wseek(0);									// Reset write action
 
 		if (this->onProcessed != NULL) {
-			this->onProcessed(this->getOutput());
+			this->onProcessed(&output);
 		}
 	}
 }
@@ -46,10 +51,6 @@ bool CommandProcessor::_encode(const ptr data, const uint& length,
 	return result;
 }
 
-DataStream* CommandProcessor::getOutput() {
-	return output;
-}
-
 CommandProcessedHandler CommandProcessor::getOnProcessed() const {
 	return onProcessed;
 }
@@ -62,60 +63,63 @@ CommandReceivedHandler CommandProcessor::getOnReceived() const {
 	return onReceived;
 }
 
-CommandProcessor::CommandProcessor(ptr buffer, uint length, const byte* tail,
-		uint tailLength, CommandReceivedHandler onReceived,
-		CommandProcessedHandler onProcessed) :
-		DataStream(buffer, length) {
-	this->tail = tail;
-	this->tailIndex = 0;
-	this->tailLength = tailLength;
-	this->onReceived = onReceived;
-	this->onProcessed = onProcessed;
-	this->output = NULL;
-}
-
-CommandProcessor::CommandProcessor(ptr buffer, uint length, const char* tail,
-		uint tailLength, CommandReceivedHandler onReceived,
-		CommandProcessedHandler onProcessed) :
-		DataStream(buffer, length) {
-	this->tail = (const byte*) tail;
-	this->tailIndex = 0;
-	this->tailLength = tailLength;
-	this->onReceived = onReceived;
-	this->onProcessed = onProcessed;
-	this->output = NULL;
-}
-
 void CommandProcessor::setOnReceived(CommandReceivedHandler onReceived) {
 	this->onReceived = onReceived;
-}
-
-void CommandProcessor::setOutput(DataStream* output) {
-	this->output = output;
 }
 
 uint CommandProcessor::getTailLength() const {
 	return tailLength;
 }
 
-CommandProcessor::CommandProcessor(ptr buffer, uint length, const byte * tail,
-		uint tailLength, CommandReceivedHandler onReceived) :
-		DataStream(buffer, length) {
+CommandProcessor::CommandProcessor(
+		ptr buffer, const uint& input_len, const uint& output_len,
+		const byte * tail, uint tailLength,
+		CommandReceivedHandler onReceived) :
+		DataStream(buffer, input_len) {
 	this->tail = tail;
 	this->tailIndex = 0;
 	this->tailLength = tailLength;
 	this->onReceived = onReceived;
 	this->onProcessed = NULL;
-	this->output = NULL;
+	this->output_len = output_len;
 }
 
-CommandProcessor::CommandProcessor(ptr buffer, uint length, const char * tail,
-		uint tailLength, CommandReceivedHandler onReceived) :
-		DataStream(buffer, length) {
+CommandProcessor::CommandProcessor(
+		ptr buffer, const uint& input_len, const uint& output_len,
+		const char * tail, uint tailLength,
+		CommandReceivedHandler onReceived) :
+		DataStream(buffer, input_len) {
 	this->tail = (const byte*) tail;
 	this->tailIndex = 0;
 	this->tailLength = tailLength;
 	this->onReceived = onReceived;
 	this->onProcessed = NULL;
-	this->output = NULL;
+	this->output_len = output_len;
+}
+
+CommandProcessor::CommandProcessor(
+		ptr buffer, const uint& input_len, const uint& output_len,
+		const byte* tail, uint tailLength, CommandReceivedHandler onReceived,
+		CommandProcessedHandler onProcessed) :
+		DataStream(buffer, input_len) {
+	this->tail = tail;
+	this->tailIndex = 0;
+	this->tailLength = tailLength;
+	this->onReceived = onReceived;
+	this->onProcessed = onProcessed;
+	this->output_len = output_len;
+}
+
+CommandProcessor::CommandProcessor(
+		ptr buffer, const uint& input_len, const uint& output_len,
+		const char* tail, uint tailLength,
+		CommandReceivedHandler onReceived,
+		CommandProcessedHandler onProcessed) :
+		DataStream(buffer, input_len) {
+	this->tail = (const byte*) tail;
+	this->tailIndex = 0;
+	this->tailLength = tailLength;
+	this->onReceived = onReceived;
+	this->onProcessed = onProcessed;
+	this->output_len = output_len;
 }

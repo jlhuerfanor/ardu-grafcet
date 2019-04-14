@@ -9,6 +9,7 @@
 #include "DataStream.h"
 
 int endiannessFlag = 1;
+byte * DATASTREAM_EOL = new byte[2]{ '\r', '\n' };
 
 DataStream::DataStream(ptr buffer, uint count) {
 	// TODO Auto-generated constructor stub
@@ -219,6 +220,6 @@ byte DataStream::endianness() {
 
 bool DataStream::encode(const char* str) {
 	uint len = strlen(str);
-
+	this->encode(len);
 	return this->encode(str, len);
 }

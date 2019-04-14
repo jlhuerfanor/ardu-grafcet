@@ -20,6 +20,8 @@
 #define L_ENDIAN 'L'
 #define B_ENDIAN 'B'
 
+extern byte * DATASTREAM_EOL;
+
 class DataStream {
 protected:
 	ptr buffer;
