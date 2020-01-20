@@ -36,7 +36,14 @@ private:
 	ulong elapsed;
 	/* Function pointer to timer event handler. */
 	TimerAction action;
+<<<<<<< Updated upstream
+=======
+	/* Timer state */
+	byte state;
+>>>>>>> Stashed changes
 public:
+	/* Timespan to wait before timer event. */
+	ulong delta;
 	/* Defines a non-continous timer instance. */
 	Timer(TimerAction action, ulong delta);
 	/* Defines a timer instance. */
